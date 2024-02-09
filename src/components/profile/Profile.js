@@ -1,11 +1,43 @@
-import React, { useState } from 'react'
+
 import './Profile.css'
 import Image from './Image'
 import Panel from './Panel'
-const Profile = () => {
+import React, { useEffect, useState } from 'react';
+import 'firebase/auth';
+import 'firebase/database';
+import {auth,db} from "../../firebaseConfig";
+import { getDatabase, ref, child, get } from 'firebase/database';
+const UserProfile = ({uid}) => {
+    const [userName, setUserName] = useState(null);
+    const [userEmail,setUserEmail] = useState(null);
     const [backimage,setBackimage]=useState("./back.jpg")
     const [profimage,setProfimage]=useState("./profpic.jpg")
+
+  useEffect(() => {
+    // Function to fetch user name based on UID
+    const fetchUserName = async () => {
+      const db = getDatabase();
+      const userRef = ref(db, `users/${uid}/displayName`); // Reference to the user's displayName in the database
+      const userRef2 = ref(db, `users/${uid}/email`);
+      try {
+        const snapshot = await get(userRef);
+        const snapshot2 = await get(userRef2);
+        if (snapshot.exists()&&snapshot2.exists()) {
+          setUserName(snapshot.val());
+          setUserEmail(snapshot2.val());
+        } else {
+          console.log("No such user found");
+        }
+      } catch (error) {
+        console.error("Error fetching user name:", error);
+      }
+    };
+
+    fetchUserName(); // Call the function to fetch user name
+  }, [uid]); // useEffect will run whenever the UID changes
+
   return (
+    <>
     <div class="overflow-hidden">
 
         <div class="top">
@@ -21,8 +53,8 @@ const Profile = () => {
         </div>
 
         <div class="text">
-            <p class=" font-manrope text-4xl font-semibold">Shubhang Shirolawala</p>  
-            <p class="font manrope text-2xl"> Web Developer at SWC</p>
+            <p class=" font-manrope text-4xl font-semibold" >{userName}</p>  
+            <p class="font manrope text-2xl">{userEmail}</p>
             <p class="font manrope text-2xl"> Vadodara,Gujarat</p>
         </div>
 
@@ -53,8 +85,8 @@ const Profile = () => {
     </div>
     <Panel/>
     </div>
-    
+    </>
   )
 }
 
-export default Profile
+export default UserProfile
