@@ -66,7 +66,7 @@ const Login = () => {
       <div className="wrapper">
         <h1>Create Account</h1>
         <div className="outlookLogin">
-          <div className="outlook" style={{border: "0.25vh solid rgb(205, 201, 201)", padding: "1.5%", margin: "1vw"}}>
+          <div className="outlook flex" style={{border: "0.25vh solid rgb(205, 201, 201)", padding: "1.5%", margin: "1vw"}}>
           <img className="Outlook-logo" src={OutlookIcon} alt="Outlook Logo" />
             <span className="Outlook-title" onClick={handleclick}>Continue with Outlook</span>
             </div>

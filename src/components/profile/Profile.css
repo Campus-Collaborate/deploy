@@ -1,0 +1,34 @@
+
+.body{
+    margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  }
+  .top{
+    position: relative;
+    height:62vh;
+    width:100%;
+  
+  }
+  .img1{
+    width: 110%;
+    
+    position: absolute;
+  }
+  .img2{
+    position: absolute;
+    top: 17vw;
+    left: 40vw;
+  }
+  .text{
+    text-align: center;
+  }
+  .middle{
+    align-items: center;
+  }
+  .btn{
+    left:50vw;
+  }
