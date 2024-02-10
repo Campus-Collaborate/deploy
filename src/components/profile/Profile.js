@@ -7,16 +7,15 @@ import 'firebase/auth';
 import 'firebase/database';
 import {auth,db} from "../../firebaseConfig";
 import { getDatabase, ref, child, get } from 'firebase/database';
+import Panel2 from './Panel2'
+import Edit from './Edit'
 const UserProfile = ({uid}) => {
     const [userName, setUserName] = useState(null);
     const [userEmail,setUserEmail] = useState(null);
-import Panel2 from './Panel2'
-import Edit from './Edit'
-const Profile = () => {
+
     const [tags, setTags] = useState([]);
     const [backimage,setBackimage]=useState("./back.jpg")
     const [profimage,setProfimage]=useState("./profpic.jpg")
-
   useEffect(() => {
     // Function to fetch user name based on UID
     const fetchUserName = async () => {
@@ -121,4 +120,4 @@ const Profile = () => {
   )
 }
 
-export default UserProfile
+export default UserProfile;
