@@ -47,7 +47,7 @@ const UserProfile = ({uid}) => {
             /></div>
             <div class="img2"><Image
             imag={profimage}
-            imagprop="ml-[3vw] rounded-[200px] z-10"
+            imagprop="ml-[2vw] mt-[-3vw] rounded-[200px] z-10"
             /></div>
             
         </div>
@@ -55,7 +55,7 @@ const UserProfile = ({uid}) => {
         <div class="text">
             <p class=" font-manrope text-4xl font-semibold" >{userName}</p>  
             <p class="font manrope text-2xl">{userEmail}</p>
-            <p class="font manrope text-2xl"> Vadodara,Gujarat</p>
+            {/* <p class="font manrope text-2xl"> Vadodara,Gujarat</p> */}
         </div>
 
         <div class="ml-[33.3vw] grid grid-cols-3 w-[34vw] text-center ">
