@@ -10,6 +10,7 @@ import { getDatabase, ref, child, get } from 'firebase/database';
 import Panel2 from './Panel2'
 import Edit from './Edit'
 const UserProfile = ({uid}) => {
+  console.log(uid);
     const [userName, setUserName] = useState(null);
     const [userEmail,setUserEmail] = useState(null);
 

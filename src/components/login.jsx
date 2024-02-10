@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from 'react';
 import { getDatabase, ref, set } from "firebase/database";
 import { auth } from "../firebaseConfig";
-import { OAuthProvider, signInWithPopup } from "firebase/auth";
+import { OAuthProvider, signInWithPopup,createUserWithEmailAndPassword } from "firebase/auth";
 import './Login.css';
 import SiteLogo from './images/websiteLogo.png';
 import OutlookIcon from './images/outlookIcon.png';
@@ -11,7 +11,35 @@ import UserProfile from '../components/profile/Profile.js';
 const Login = () => {
   const [user, setUser] = useState(null);
   const [email,setEmail]= useState(null);
+  const [password,setPassword]= useState(null);
   const [showProfile, setShowProfile] = useState(false);
+  const handlesignup=async(e)=>{
+    e.preventDefault();
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      console.log(user);
+      const db = getDatabase();
+      const usersRef = ref(db, 'users/' + user.uid); // Use the user's UID as the key for their data
+      set(usersRef, {
+        displayName: user.displayName,
+        email: user.email,
+        // Add any more user details you want to store
+      })
+      .then(() => {
+        console.log("User information saved to database");
+        console.log(user);
+        setShowProfile(true);
+      })
+      .catch((error) => {
+        console.error("Could not save user information to database", error);
+      });
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorCode, errorMessage);
+    }
+  }
   const handleclick = async (e) => {
     const provider = new OAuthProvider('microsoft.com');
     provider.setCustomParameters({
@@ -76,13 +104,15 @@ const Login = () => {
             <input type="text" placeholder="Full Name" required></input>
           </div>
           <div className="input-box">
-            <input type="email" placeholder="Email Address" required></input>
+            <input type="email" placeholder="Email Address" required value={email}
+                onChange={(e) => setEmail(e.target.value)}></input>
           </div>
           <div className="input-box">
-            <input type="password" placeholder="Password" required></input>
+            <input type="password" placeholder="Password" required value={password}
+                onChange={(e) => setPassword(e.target.value)}></input>
           </div>
 
-          <button type="submit">Create Account</button>
+          <button type="submit" onClick={handlesignup}>Create Account</button>
 
           <div className="login-link">
             <p>
