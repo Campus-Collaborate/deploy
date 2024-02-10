@@ -1,7 +1,7 @@
 import React from 'react';
 import Card from './Card';
 
-const Panel = () => {
+const Panel = ({prop}) => {
   
   const cardData = [
     {
@@ -48,7 +48,7 @@ const Panel = () => {
   ];
 
   return (
-    <div className="grid ml-[10vw] grid-cols-4 gap-3 w-[80vw] ">
+    <div className={prop}>
       {cardData.map((card, index) => (
         <Card
           key={index}
