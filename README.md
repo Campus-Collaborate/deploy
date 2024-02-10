@@ -1,70 +1,62 @@
-# Getting Started with Create React App
+# Project Name ReadMe
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description
+This project is a web application built to facilitate student interaction within a school or educational institution. It allows students to login using either their email and password or via Outlook authentication. Once logged in, students can edit their profiles and search for other users within the system.
 
-## Available Scripts
+## Tech Stack
+- Frontend:
+  - React JS
+  - Tailwind CSS
+- Backend:
+  - Firebase Authentication
+  - Firebase Database
+  - Azure Authentication for Outlook
 
-In the project directory, you can run:
+## Features
+- **User Authentication:**
+  - Users can login using either their email and password or Outlook authentication.
+- **Profile Editing:**
+  - Authenticated users can edit their profiles, including updating their personal information.
+- **Search Functionality:**
+  - Users can search for other users within the system and view their profiles.
 
-### `npm start`
+## Installation
+1. Clone the repository to your local machine.
+2. Navigate to the project directory.
+3. Install dependencies using `npm install`.
+4. Set up Firebase and Azure authentication services.
+5. Configure Firebase and Azure credentials in the project.
+6. Run the project using `npm start`.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Configuration
+### Firebase Setup
+1. Create a Firebase project in the Firebase console.
+2. Enable Firebase Authentication and Firebase Realtime Database.
+3. Obtain the Firebase configuration details.
+4. Replace the Firebase configuration in the project.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Azure Setup
+1. Set up an Azure Active Directory (Azure AD) tenant.
+2. Register your application with Azure AD.
+3. Configure authentication settings for your application.
+4. Obtain the Azure authentication details.
+5. Replace the Azure authentication configuration in the project.
 
-### `npm test`
+## Usage
+- Once the project is set up and running, users can navigate to the login page.
+- Users can choose between email/password authentication or Outlook authentication.
+- After successful authentication, users can edit their profiles and search for other users.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Contributing
+Contributions are welcome! If you'd like to contribute to this project, please fork the repository and submit a pull request with your changes.
 
-### `npm run build`
+## Getting Started
+To start the project, run the following command:
+NPM start
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## NPM Libraries Used
+- [react](https://www.npmjs.com/package/react)
+- [tailwindcss](https://www.npmjs.com/package/tailwindcss)
+- [firebase](https://www.npmjs.com/package/firebase)
+- [azure-identity](https://www.npmjs.com/package/@azure/identity)
+- [azure-authentication-legacy](https://www.npmjs.com/package/@azure/authentication-legacy)
