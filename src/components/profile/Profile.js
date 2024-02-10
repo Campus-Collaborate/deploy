@@ -1,13 +1,45 @@
-import React, { useState } from 'react'
+
 import './Profile.css'
 import Image from './Image'
 import Panel from './Panel'
+import React, { useEffect, useState } from 'react';
+import 'firebase/auth';
+import 'firebase/database';
+import {auth,db} from "../../firebaseConfig";
+import { getDatabase, ref, child, get } from 'firebase/database';
+const UserProfile = ({uid}) => {
+    const [userName, setUserName] = useState(null);
+    const [userEmail,setUserEmail] = useState(null);
 import Panel2 from './Panel2'
 import Edit from './Edit'
 const Profile = () => {
     const [tags, setTags] = useState([]);
     const [backimage,setBackimage]=useState("./back.jpg")
     const [profimage,setProfimage]=useState("./profpic.jpg")
+
+  useEffect(() => {
+    // Function to fetch user name based on UID
+    const fetchUserName = async () => {
+      const db = getDatabase();
+      const userRef = ref(db, `users/${uid}/displayName`); // Reference to the user's displayName in the database
+      const userRef2 = ref(db, `users/${uid}/email`);
+      try {
+        const snapshot = await get(userRef);
+        const snapshot2 = await get(userRef2);
+        if (snapshot.exists()&&snapshot2.exists()) {
+          setUserName(snapshot.val());
+          setUserEmail(snapshot2.val());
+        } else {
+          console.log("No such user found");
+        }
+      } catch (error) {
+        console.error("Error fetching user name:", error);
+      }
+    };
+
+    fetchUserName(); // Call the function to fetch user name
+  }, [uid]); // useEffect will run whenever the UID changes
+
     const [panel,setPanel]=useState(true)
     const [texts,setTexts] = useState(["Story","Experience"])
     const [edit,setEdit]=useState(false)
@@ -17,6 +49,7 @@ const Profile = () => {
       };
       
   return (
+    <>
     <div class="overflow-hidden">
 
         <div class="top">
@@ -26,15 +59,15 @@ const Profile = () => {
             /></div>
             <div class="img2"><Image
             imag={profimage}
-            imagprop="ml-[3vw] mt-[-6vh] rounded-[200px] z-1"
+            imagprop="ml-[2vw] mt-[-3vw] rounded-[200px] z-10"
             /></div>
             
         </div>
 
         <div class="text">
-            <p class=" font-manrope text-4xl font-semibold">Shubhang Shirolawala</p>  
-            <p class="font manrope text-2xl"> Web Developer at SWC</p>
-            <p class="font manrope text-2xl"> Vadodara,Gujarat</p>
+            <p class=" font-manrope text-4xl font-semibold" >{userName}</p>  
+            <p class="font manrope text-2xl">{userEmail}</p>
+            {/* <p class="font manrope text-2xl"> Vadodara,Gujarat</p> */}
         </div>
 
         <div class="ml-[29vw] md:ml-[31.3vw] lg:ml-[33.3vw] gap-2 grid grid-cols-3 w-[34vw] text-center ">
@@ -84,8 +117,8 @@ const Profile = () => {
     setLinks={setLinks}
     />}
     </div>
-    
+    </>
   )
 }
 
-export default Profile
+export default UserProfile

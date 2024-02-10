@@ -3,13 +3,14 @@ import { useState } from 'react';
 import { getDatabase, ref, set } from "firebase/database";
 import { auth } from "../firebaseConfig";
 import { OAuthProvider, signInWithPopup } from "firebase/auth";
-import Profile from "./Profile.js";
 import './Login.css';
 import SiteLogo from './images/websiteLogo.png';
 import OutlookIcon from './images/outlookIcon.png';
-
+import UserProfile from '../components/profile/Profile.js';
 
 const Login = () => {
+  const [user, setUser] = useState(null);
+  const [email,setEmail]= useState(null);
   const [showProfile, setShowProfile] = useState(false);
   const handleclick = async (e) => {
     const provider = new OAuthProvider('microsoft.com');
@@ -23,8 +24,8 @@ const Login = () => {
         const credential = OAuthProvider.credentialFromResult(result);
         const accessToken = credential.accessToken;
         // The signed-in user info.
-        const user = result.user;
-
+        setUser(result.user);
+        setEmail(result.email);
         // Now that we have the user's information, let's store it in the Realtime Database
         const db = getDatabase();
         const usersRef = ref(db, 'users/' + user.uid); // Use the user's UID as the key for their data
@@ -56,10 +57,8 @@ const Login = () => {
   }
   return (
     <>
-    <div>
-      {showProfile && <Profile />}
-    </div>
-    <div style={{ position: "absolute", width: "100%",  display:showProfile ? "none" : "flex"}}> 
+    {user && <UserProfile uid={user.uid} />}
+    <div style={{ position: "absolute", width: "100%",  display:user ? "none" : "flex"}}> 
       <div className="img">
         <img className="cc" src={SiteLogo} alt="cc Logo" />
       </div>
